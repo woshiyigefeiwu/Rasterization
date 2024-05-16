@@ -15,6 +15,9 @@ class UI_MyRenderer;
 // 选项：多线程，平面裁切
 enum Option{MUTITHREAD, FACECULLING};
 
+// 渲染模式(面，线，点)
+enum RenderMode{FACE,LINE,VERTEX};
+
 class UI_MyRenderer : public QMainWindow
 {
     Q_OBJECT
@@ -26,6 +29,9 @@ public:
 
     // 设置选项
     void SetOption(Option option, bool val);
+
+    // 设置渲染模式
+    void SetRenderMode(RenderMode mode) {renderMode = mode;}
 
 /*--------------------------- protected 成员函数 -----------------------------*/
 protected:
@@ -53,6 +59,19 @@ private:
     // 开始渲染
     void Render();
 
+    // 清空
+    void clearImage();
+
+    // 面渲染
+    void FaceRender();
+
+    // 线渲染
+    void LineRender();
+
+    // 点渲染
+    void VertexRender();
+
+
 /*--------------------------- 槽函数 -----------------------------*/
 private slots:
 
@@ -72,6 +91,7 @@ private slots:
 
     void on_action_About_triggered();
 
+    // 光线
     void on_LightPitchSlider_ValueChanged(int val);
 
     void on_LightYawDial_ValueChanged(int val);
@@ -82,18 +102,22 @@ private slots:
 
     void on_AmbientCheckBox_stateChanged(int state);
 
+    // 摄像机
     void on_CameraPitchSlider_ValueChanged(int val);
 
     void on_CameraYawDial_ValueChanged(int val);
 
     void on_CameraFovSlider_ValueChanged(int val);
 
+    // 模型
+    void on_LineCheckBox_stateChanged(int state);       // 线渲染
+
+    void on_VertexCheckBox_stateChanged(int state);       // 点渲染
+
+
 /*--------------------------- 公有成员变量 -----------------------------*/
 public:
-
-
-
-
+    RenderMode renderMode = FACE;
 
 /*--------------------------- 私有成员变量 -----------------------------*/
 private:

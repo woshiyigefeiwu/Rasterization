@@ -111,6 +111,25 @@ void UI_MyRenderer::Render()
 
     qDebug() << "model点数：" << model->nverts() << "；model面数：" << model->nfaces() << '\n';
 
+    if(renderMode == FACE) FaceRender();
+    else if(renderMode == VERTEX) VertexRender();
+    else if(renderMode == LINE) LineRender();
+}
+
+// 清空画面
+void UI_MyRenderer::clearImage()
+{
+    //在这里初始化一下 Image
+    QImage TempImage(Width, Height, QImage::Format_RGB888);
+    TempImage.fill(QColor(255.f, 255.f, 255.f));
+    ShowImage = TempImage;
+
+    update();
+}
+
+// 面渲染
+void UI_MyRenderer::FaceRender()
+{
     //在这里初始化一下 Image
     QImage TempImage(Width, Height, QImage::Format_RGB888);
     TempImage.fill(QColor(255.f, 255.f, 255.f));
@@ -155,12 +174,82 @@ void UI_MyRenderer::Render()
 //    zbuffer.write_tga_file("zbuffer.tga");
 }
 
+// 线渲染
+void UI_MyRenderer::LineRender()
+{
+    //在这里初始化一下 Image
+    QImage TempImage(Width, Height, QImage::Format_RGB888);
+    TempImage.fill(QColor(255.f, 255.f, 255.f));
+    ShowImage = TempImage;
+    TGAImage zbuffer(Width, Height, TGAImage::GRAYSCALE);
+
+    // 实例化 Phong 着色
+    PhongShader shader(model);
+    shader.setupColor(specularColor, diffuseColor, ambientColor);   // 设置一下选择的颜色
+
+    // 遍历模型的面
+    for (int i = 0; i < model->nfaces(); i++)
+    {
+        // 三角形的屏幕坐标
+        Vec4f screen_coords[3];
+        for (int j = 0; j < 3; j++)
+        {
+            /*
+                通过顶点着色器读取模型顶点
+                变换顶点坐标到屏幕坐标（视角矩阵 * 投影矩阵 * 模型视图变换矩阵 * v）
+                （注意这里给的是齐次坐标哦，要用的话还需要除以最后一个分量的）
+                计算光照强度
+            */
+            screen_coords[j] = shader.vertex(i, j);
+        }
+
+
+        DrawLine(screen_coords, ShowImage);
+    }
+
+    update();
+}
+
+// 点渲染
+void UI_MyRenderer::VertexRender()
+{
+    //在这里初始化一下 Image
+    QImage TempImage(Width, Height, QImage::Format_RGB888);
+    TempImage.fill(QColor(255.f, 255.f, 255.f));
+    ShowImage = TempImage;
+    TGAImage zbuffer(Width, Height, TGAImage::GRAYSCALE);
+
+    // 实例化 Phong 着色
+    PhongShader shader(model);
+    shader.setupColor(specularColor, diffuseColor, ambientColor);   // 设置一下选择的颜色
+
+    // 遍历模型的面
+    for (int i = 0; i < model->nfaces(); i++)
+    {
+        // 三角形的屏幕坐标
+        Vec4f screen_coords[3];
+        for (int j = 0; j < 3; j++)
+        {
+            /*
+                通过顶点着色器读取模型顶点
+                变换顶点坐标到屏幕坐标（视角矩阵 * 投影矩阵 * 模型视图变换矩阵 * v）
+                （注意这里给的是齐次坐标哦，要用的话还需要除以最后一个分量的）
+                计算光照强度
+            */
+            screen_coords[j] = shader.vertex(i, j);
+        }
+
+        DrawPoint(screen_coords, zbuffer, ShowImage);
+    }
+
+    update();
+}
+
 /*----------------------------------------- 槽函数 ---------------------------------------*/
 
 //
 void UI_MyRenderer::on_CameraFovSlider_ValueChanged(int val)
 {
-
     InitMatrix();
     Render();
 }
@@ -364,5 +453,31 @@ void UI_MyRenderer::on_action_About_triggered()
     qDebug() << "This is on_action_About_triggered()！\n";
 }
 
+void UI_MyRenderer::on_LineCheckBox_stateChanged(int state)       // 线渲染
+{
+    clearImage();
+    if (state == Qt::Unchecked)
+    {
+        SetRenderMode(FACE);
+    }
+    else if(state == Qt::Checked)
+    {
+        SetRenderMode(LINE);
+    }
 
+    Render();
+}
+void UI_MyRenderer::on_VertexCheckBox_stateChanged(int state)       // 点渲染
+{
+    clearImage();
+    if (state == Qt::Unchecked)
+    {
+        SetRenderMode(FACE);
+    }
+    else if(state == Qt::Checked)
+    {
+        SetRenderMode(VERTEX);
+    }
 
+    Render();
+}

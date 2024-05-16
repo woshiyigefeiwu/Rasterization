@@ -52,6 +52,12 @@ void viewport(int x, int y, int w, int h);
 // 绘制填充三角形
 void triangle(Vec4f* pts, IShader& shader, TGAImage& image, TGAImage& zbuffer, QImage &ShowImage);
 
+// 划点
+void DrawPoint(Vec4f* pts, TGAImage& zbuffer, QImage &ShowImage);
+
+// 划线
+void DrawLine(Vec4f* pts, QImage &ShowImage);
+
 // 清空显示图像缓存
 void ClearBuffer(TGAColor color);
 

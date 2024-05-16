@@ -45,7 +45,7 @@ public:
     float specular(Vec2f uv);
 
 
-private:
+public:
     // 模型顶点集合 v
     std::vector<Vec3f> verts_;
     

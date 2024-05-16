@@ -26,7 +26,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>870</x>
+      <x>880</x>
       <y>20</y>
       <width>391</width>
       <height>571</height>
@@ -106,46 +106,46 @@
      <widget class="QPushButton" name="SpecularColorButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>190</x>
         <y>280</y>
-        <width>161</width>
+        <width>31</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>Specular Color</string>
+       <string>...</string>
       </property>
      </widget>
      <widget class="QPushButton" name="DiffuseColorButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>190</x>
         <y>330</y>
-        <width>161</width>
+        <width>31</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>Diffuse Color</string>
+       <string>...</string>
       </property>
      </widget>
      <widget class="QPushButton" name="AmbientColorButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>190</x>
         <y>380</y>
-        <width>161</width>
+        <width>31</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>Ambient Color</string>
+       <string>...</string>
       </property>
      </widget>
      <widget class="QCheckBox" name="SpecularCheckBox">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>40</x>
         <y>280</y>
         <width>141</width>
         <height>21</height>
@@ -158,7 +158,7 @@
      <widget class="QCheckBox" name="DiffuseCheckBox">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>40</x>
         <y>330</y>
         <width>141</width>
         <height>21</height>
@@ -171,7 +171,7 @@
      <widget class="QCheckBox" name="AmbientCheckBox">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>40</x>
         <y>380</y>
         <width>141</width>
         <height>21</height>
@@ -202,8 +202,8 @@
      <widget class="QLabel" name="YawLabel_2">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>80</y>
+        <x>250</x>
+        <y>70</y>
         <width>41</width>
         <height>31</height>
        </rect>
@@ -234,8 +234,8 @@
      <widget class="QDial" name="CameraYawDial">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>100</y>
+        <x>210</x>
+        <y>80</y>
         <width>101</width>
         <height>151</height>
        </rect>
@@ -247,8 +247,8 @@
      <widget class="QSlider" name="CameraFovSlider">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>350</y>
+        <x>110</x>
+        <y>300</y>
         <width>160</width>
         <height>18</height>
        </rect>
@@ -263,8 +263,8 @@
      <widget class="QLabel" name="FovLabel">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>350</y>
+        <x>70</x>
+        <y>300</y>
         <width>31</width>
         <height>16</height>
        </rect>
@@ -278,6 +278,32 @@
      <attribute name="title">
       <string>模型</string>
      </attribute>
+     <widget class="QCheckBox" name="VertexCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>60</y>
+        <width>89</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>点渲染</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="LineCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>120</y>
+        <width>89</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>线渲染</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
