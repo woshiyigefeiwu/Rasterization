@@ -75,12 +75,6 @@ private:
 /*--------------------------- 槽函数 -----------------------------*/
 private slots:
 
-    void on_SpecularColorButton_clicked();
-
-    void on_DiffuseColorButton_clicked();
-
-    void on_AmbientColorButton_clicked();
-
     void on_action_OpenFile_triggered();
 
     void on_action_SaveImage_triggered();
@@ -101,6 +95,12 @@ private slots:
     void on_DiffuseCheckBox_stateChanged(int state);
 
     void on_AmbientCheckBox_stateChanged(int state);
+
+    void on_SpecularColorButton_clicked();
+
+    void on_DiffuseColorButton_clicked();
+
+    void on_AmbientColorButton_clicked();
 
     // 摄像机
     void on_CameraPitchSlider_ValueChanged(int val);
