@@ -261,6 +261,8 @@ void DrawLine(pair<Vec2f,Vec2f> line, QImage &ShowImage)
         std::swap(x0, x1);
         std::swap(y0, y1);
     }
+
+    // input -> (x0,y0) and (x1,y1)
     int dx = x1 - x0;
     int dy = y1 - y0;
     int k = dy > 0 ? 1 : -1;
